@@ -1,34 +1,37 @@
 # Unrpyc, the Ren'py script decompiler.
 
-Unrpyc is a tool to decompile Ren'Py (http://www.renpy.org/) compiled .rpyc
-script files. It will not extract files from .rpa archives. For that, use
-[rpatool](https://github.com/Shizmob/rpatool) or
-[UnRPA](https://github.com/Lattyware/unrpa).
-
-
-## Status
-
-master:[![Build Status](https://github.com/CensoredUsername/unrpyc/actions/workflows/python-app.yaml/badge.svg?branch=master)](https://github.com/CensoredUsername/unrpyc/actions/workflows/python-app.yaml)
-
-dev:[![Build Status](https://github.com/CensoredUsername/unrpyc/actions/workflows/python-app.yaml/badge.svg?branch=dev)](https://github.com/CensoredUsername/unrpyc/actions/workflows/python-app.yaml)
-
 ## Usage
 
-This tool can either be ran as a command line tool, as a library, or injected into the game itself. It requires Python 2.7 to be installed to be used as a command line tool.
+It requires Python 3.x to be installed to be used as a command line tool.
+
+This edition uses the fix mentioned here by the user MARLBORO-NEW:
+
+[RevertableDict (Workaround - Fix?) #156](https://github.com/CensoredUsername/unrpyc/issues/156)
+
+This could affect compatibility. It has only been partially tested with scripts created with
+Ren'Py 8 (Python3).
 
 ### Command line tool usage
+
+The usage is the same as the original, except that this time Python 3 is used instead of 2.
 
 Depending on your system setup, you should use one of the following commands to run the tool:
 ```
 python unrpyc.py [options] script1 script2 ...
-python2 unrpyc.py [options] script1 script2 ...
-py -2 unrpyc.py [options] script1 script2 ...
+py unrpyc.py [options] script1 script2 ...
 ./unrpyc.py [options] script1 script2 ...
+```
+
+If the above methods don't work add PYTHONPATH=path/to/decompiler/modules to the beginning followed by one of the above options. example:
+```
+PYTHONPATH=C:\unrpyc3-master\decompiler python unrpyc.py [options] script1 script2 ...
+PYTHONPATH=C:\unrpyc3-master\decompiler py unrpyc.py [options] script1 script2 ...
+PYTHONPATH=C:\unrpyc3-master\decompiler ./unrpyc.py [options] script1 script2 ...
 ```
 
 Options:
 ```
-$ py -2 unrpyc.py --help
+$ py unrpyc.py --help
 usage: unrpyc.py [-h] [-c] [-d] [-p {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}]
                  [-t TRANSLATION_FILE] [-T WRITE_TRANSLATION_FILE]
                  [-l LANGUAGE] [--sl1-as-python] [--comparable] [--no-pyexpr]
@@ -110,10 +113,14 @@ the `game` directory inside a Ren'py game. When the game is then ran the tool
 will automatically extract and decompile all game script files into the `game`
 directory. The tool writes logs to the file `unrpyc.log.txt`.
 
+This option cannot be used yet...
+
 ### Library usage
 
 You can import the module from python and call
 unrpyc.decompile_rpyc(filename, ...) directly.
+
+* This option has not been tested yet in this version!
 
 ## Notes on support
 
@@ -126,17 +133,14 @@ to recent engine versions so if you encounter an issues with older games, please
 report it.
 
 Supported:
-* renpy version 6 and 7 (current)
-* Windows, OSX and Linux
+* renpy version 8 (partially?). Older versions are not tested yet!
+* Windows, untested on Linux yet, no way to test it on OSX...
 
 ## Issue reports
 
-As Ren'py is being continuously developed itself it often occurs that this tool might
-break on newer engine releases. This is most likely due to us not being
-aware of these features existing in the first place. To get this fixed
-you can make an issue report to this repository. However, we work on this tool
-in our free time and therefore we strongly request performing the following steps when
-making an issue report.
+I don't maintain my repos consistently so there is a chance it will take a long time to even
+check the issue reports. If you want to report any issue the rules are the same as the
+original repo.
 
 ### Before making an issue report:
 
@@ -177,5 +181,7 @@ and it's trivial to figure out a way to obfuscate the file that blocks anything 
 supported right now. If you make a pull request with it we'll happily put it in mainline
 or a game-specific branch depending on how many games it affects, but we have little
 motivation ourselves to put time in this arms race.
+
+## Original Repository (unrpyc original Python2 edition)
 
 https://github.com/CensoredUsername/unrpyc
