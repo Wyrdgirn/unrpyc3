@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 import sys
 import re
-from StringIO import StringIO
+from io import StringIO
 from contextlib import contextmanager
 
 class DecompilerBase(object):
@@ -41,7 +41,7 @@ class DecompilerBase(object):
         """
         Shorthand method for writing `string` to the file
         """
-        string = unicode(string)
+        string = str(string)
         self.linenumber += string.count('\n')
         self.skip_indent_until_write = False
         self.out_file.write(string)
@@ -219,10 +219,12 @@ def reconstruct_arginfo(arginfo):
         if name is not None:
             rv.append("%s=" % name)
         rv.append(val)
-    if arginfo.extrapos:
+    #if arginfo.extrapos:
+    if hasattr(arginfo,'extrapos') and arginfo.extrapos:
         rv.append(sep())
         rv.append("*%s" % arginfo.extrapos)
-    if arginfo.extrakw:
+    #if arginfo.extrakw:
+    if hasattr(arginfo,'extrakw') and arginfo.extrakw:
         rv.append(sep())
         rv.append("**%s" % arginfo.extrakw)
     rv.append(")")
@@ -444,7 +446,7 @@ class WordConcatenator(object):
                     self.words.append(self.words.pop(i))
                     break
         last_word = self.words[-1]
-        self.words = map(lambda x: x[:-1] if x[-1] == ' ' else x, self.words[:-1])
+        self.words = list(map(lambda x: x[:-1] if x[-1] == ' ' else x, self.words[:-1]))
         self.words.append(last_word)
         rv = (' ' if self.needs_space else '') + ' '.join(self.words)
         self.needs_space = rv[-1] != ' '
