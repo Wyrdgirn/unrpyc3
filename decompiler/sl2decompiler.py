@@ -339,8 +339,11 @@ class SL2Decompiler(DecompilerBase):
         children_with_keywords = []
         children_after_keywords = []
         for i in children:
-            if i.location[1] > last_keyword_line:
-                children_after_keywords.append(i)
+            if last_keyword_line != None:
+                if i.location[1] > last_keyword_line:
+                    children_after_keywords.append(i)
+                else:
+                    children_with_keywords.append((i.location[1], i))
             else:
                 children_with_keywords.append((i.location[1], i))
         # the keywords in keywords_by_line[0] go on the line that starts the
