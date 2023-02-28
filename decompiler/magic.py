@@ -109,7 +109,8 @@ A barebones instance of :class:`FakeClassType`. Inherit from this to create fake
 class FakeStrict(FakeClass, object):
     def __new__(cls, *args, **kwargs):
         self = FakeClass.__new__(cls)
-        if args or kwargs:
+        #if args or kwargs:
+        if (args or kwargs) and args != ([],) and kwargs != {}:
             raise FakeUnpicklingError("{0} was instantiated with unexpected arguments {1}, {2}".format(cls, args, kwargs))
         return self
 
@@ -389,7 +390,7 @@ class FakePackageLoader(object):
         self.root = root
 
     def find_module(self, fullname, path=None):
-        if fullname == self.root or fullname.startswith(self.root + "."):
+        if fullname == self.root or fullname.startswith(str(self.root) + "."):
             return self
         else:
             return None
