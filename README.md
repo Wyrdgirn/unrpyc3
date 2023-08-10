@@ -2,14 +2,14 @@
 
 ## Usage
 
-It requires Python 3.x to be installed to be used as a command line tool.
+It requires Python 3.x to be installed to be used as a command line tool (tested with python 3.9 and 3.10). It can work with the python included in renpy 8+ (including the games) but maybe it needs some fixes that I will upload soon to the repository in the next update, but you are free to try if it works :)
 
 This edition uses the fix mentioned here by the user MARLBORO-NEW:
 
 [RevertableDict (Workaround - Fix?) #156](https://github.com/CensoredUsername/unrpyc/issues/156)
 
 This could affect compatibility. It has only been partially tested with scripts created with
-Ren'Py 8 (Python3).
+Ren'Py 8 (Python3). It is preferable to use it in scripts with the game content only (those with the story and logic of the game...), it generates erroneous code in some main scripts like the screens.rpyc, if your game doesn't work with the decompiled scripts, fix the code or delete the main ones (script.rpy, screens.rpy...) and use the original precompiled ones...
 
 ### Command line tool usage
 
@@ -28,6 +28,8 @@ PYTHONPATH=C:\unrpyc3-master\decompiler python unrpyc.py [options] script1 scrip
 PYTHONPATH=C:\unrpyc3-master\decompiler py unrpyc.py [options] script1 script2 ...
 PYTHONPATH=C:\unrpyc3-master\decompiler ./unrpyc.py [options] script1 script2 ...
 ```
+
+I recommend using a Linux-based environment (MSYS or Cygwin) when using it on Windows (or try PowerShell) if the console gives you problems. 
 
 Options:
 ```
@@ -113,7 +115,7 @@ the `game` directory inside a Ren'py game. When the game is then ran the tool
 will automatically extract and decompile all game script files into the `game`
 directory. The tool writes logs to the file `unrpyc.log.txt`.
 
-This option cannot be used yet...
+This option is not implemented correctly on unrpyc3, instead it uses the original unrpyc but this only works with renpy 7 and below...
 
 ### Library usage
 
@@ -133,12 +135,12 @@ to recent engine versions so if you encounter an issues with older games, please
 report it.
 
 Supported:
-* renpy version 8 (partially?). Older versions are not tested yet!
-* Windows, untested on Linux yet, no way to test it on OSX...
+* renpy version 8 (partially?). Doesn't work with renpy 6 and 7 (python2) scripts!
+* Windows and Linux, no way to test it on OSX...
 
 ## Issue reports
 
-I don't maintain my repos consistently so there is a chance it will take a long time to even
+I (Wyrdgirn) don't maintain my repos consistently so there is a chance it will take a long time to even
 check the issue reports. If you want to report any issue the rules are the same as the
 original repo.
 
