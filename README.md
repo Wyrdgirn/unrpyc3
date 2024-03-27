@@ -1,14 +1,14 @@
 # Unrpyc, the Ren'py script decompiler.
 
+# ===============================================================================
+# This Repository is out of date. please use the [original decompiler](https://github.com/CensoredUsername/unrpyc) by CensoredUsername which is already supporting Renpy 8 scripts
+# ===============================================================================
+
 ## Usage
 
-It requires Python 3.x to be installed to be used as a command line tool (tested with python 3.9 and 3.10). It can work with the python included in renpy 8+ (including the games) but maybe it needs some fixes that I will upload soon to the repository in the next update, but you are free to try if it works :)
+It requires Python 3.x to be installed to be used as a command line tool (tested with python 3.9 and 3.10). It can work with the python included in renpy 8+ (including the games) but maybe it needs some fixes.
 
-This edition uses the fix mentioned here by the user MARLBORO-NEW:
-
-[RevertableDict (Workaround - Fix?) #156](https://github.com/CensoredUsername/unrpyc/issues/156)
-
-This could affect compatibility. It has only been partially tested with scripts created with Ren'Py 8 (Python3). It is preferable to use it in scripts with the game content only (those with the story and logic of the game...), it generates erroneous code in some main scripts like the screens.rpyc, if your game doesn't work with the decompiled scripts, fix the code or delete the main ones (script.rpy, screens.rpy...) and use the original precompiled ones...
+This edition uses the RevertableDict (Workaround - Fix?) [#156](https://github.com/CensoredUsername/unrpyc/issues/156) by the user MARLBORO-NEW, this could affect compatibility. It has only been partially tested with scripts created with Ren'Py 8 (Python3). It is preferable to use it in scripts with the game content only (those with the story and logic of the game...), it generates erroneous code in some main scripts like the screens.rpyc, if your game doesn't work with the decompiled scripts, fix the code or delete the main ones (script.rpy, screens.rpy...) and use the original precompiled ones...
 
 ### Command line tool usage
 
@@ -145,7 +145,3 @@ Feature and pull requests are welcome. Feature requests will be handled whenever
 ### Notes on deobfuscation
 
 Recently a lot of modifications of Ren'py have turned up that slightly alter the Ren'py file format to block this tool from working. The tool now includes a basic framework for deobfuscation, but feature requests to create deobfuscation support for specific games are not likely to get a response from us as this is essentially just an arms race, and it's trivial to figure out a way to obfuscate the file that blocks anything that is supported right now. If you make a pull request with it we'll happily put it in mainline or a game-specific branch depending on how many games it affects, but we have little motivation ourselves to put time in this arms race.
-
-## Original Repository (unrpyc original Python2 edition)
-
-https://github.com/CensoredUsername/unrpyc
